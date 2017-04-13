@@ -14,7 +14,7 @@ class SysCommand(PluginCommand):
 
           Usage:
                 sys git commit MESSAGE
-                sys git upload
+                sys pypi upload
                 sys command generate NAME
 
           This command does some useful things.
@@ -26,6 +26,35 @@ class SysCommand(PluginCommand):
           Options:
               -f      specify the file
 
+          Description:      
+              cms sys command generate my
+                This requires that you have checkecked out 
+                
+                ./cloudmesh.common
+                ./cloudmesh.cmd5
+                ./cloudmesh.sys
+                
+                When you execute in . this command
+                It will generate a sample directory tree for
+                the command my.
+                
+                You can than modify 
+              
+                cloudmesh.my/cloudmesh/my/command/my.py
+                
+                to define your own cmd5 add on commands.
+                You install the command with 
+                
+                cd cloudmesh.my; pip install .
+                
+            cms pypi
+            cms git
+            
+                These commands are only to be used by Gregor
+                They upload the new versions to pypi
+                
+                The git command adds a new version and commits
+                The upload command uploads the new version to pypi
         """
         print(arguments)
 
