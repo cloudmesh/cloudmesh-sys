@@ -63,7 +63,7 @@ class SysCommand(PluginCommand):
             msg = arguments.MESSAGE
             Git.commit(msg)
 
-        elif arguments.git and arguments.upload:
+        elif arguments.pypi and arguments.upload:
 
             Git.upload()
 
