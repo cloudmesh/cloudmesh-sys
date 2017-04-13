@@ -21,23 +21,23 @@ class SysCommand(PluginCommand):
         ::
 
           Usage:
-                sys git commit MESSAGE
-                sys pypi upload
-                sys command generate NAME
-                sys version VERSION
+            sys upload
+            sys commit MESSAGE
+            sys command generate NAME
+            sys version VERSION
 
           This command does some useful things.
 
           Arguments:
-              MESSAGE   the message to commit 
-              NAME      the command to generate
-              VERSION  the version number
+            MESSAGE   the message to commit 
+            NAME      the command to generate
+            VERSION   the version number
 
           Options:
-              -f      specify the file
+            -f      specify the file
 
           Description:      
-              cms sys command generate my
+            cms sys command generate my
                 This requires that you have checked out 
                 
                 ./cloudmesh.common
@@ -57,8 +57,8 @@ class SysCommand(PluginCommand):
                 
                 cd cloudmesh.my; pip install .
                 
-            cms pypi
-            cms git
+            cms commit
+            cms upload
             
                 These commands are only to be used by Gregor
                 They upload the new versions to pypi
@@ -68,12 +68,12 @@ class SysCommand(PluginCommand):
         """
         print(arguments)
 
-        if arguments.git and arguments.commit:
+        if arguments.commit:
 
             msg = arguments.MESSAGE
             Git.commit(msg)
 
-        elif arguments.pypi and arguments.upload:
+        elif arguments.upload:
 
             Git.upload()
 
