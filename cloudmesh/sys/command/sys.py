@@ -35,8 +35,8 @@ class SysCommand(PluginCommand):
                 ./cloudmesh.sys
                 
                 When you execute in . this command
-                It will generate a sample directory tree for
-                the command my.
+                will generate a sample directory tree for
+                the command 'my'.
                 
                 You can than modify 
               
