@@ -6,16 +6,16 @@ from cloudmesh.shell.command import command
 from cloudmesh.sys.manage import Command, Git
 
 
-class BarCommand(PluginCommand):
+class SysCommand(PluginCommand):
     @command
-    def do_bar(self, args, arguments):
+    def do_sys(self, args, arguments):
         """
         ::
 
           Usage:
-                git commit MESSAGE
-                git upload
-                command generate NAME
+                sys git commit MESSAGE
+                sys git upload
+                sys command generate NAME
 
           This command does some useful things.
 

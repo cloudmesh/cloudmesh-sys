@@ -12,7 +12,8 @@ class Command(object):
 
         data = {
             "command": name,
-            "package": "cloudmesh.{}".format(name)
+            "package": "cloudmesh.{}".format(name),
+            "Command": name.capitalize()
         }
 
         pprint(data)
@@ -32,6 +33,8 @@ class Command(object):
         os.rename("{package}/cloudmesh/bar".format(**data),
                   "{package}/cloudmesh/{command}".format(**data))
         shutil.rmtree('{package}/cloudmesh/foo'.format(**data))
+        os.system('sed -ie "s/bar/{command}/g" {package}/cloudmesh/{command}/command/{command}.py'.format(**data))
+        os.system('sed -ie "s/Bar/{Command}/g" {package}/cloudmesh/{command}/command/{command}.py'.format(**data))
 
 
 class Git(object):
