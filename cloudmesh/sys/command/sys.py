@@ -1,12 +1,20 @@
+"""
+The sys command to manage the cmd5 distribution
+"""
 from __future__ import print_function
 
 from cloudmesh.shell.command import PluginCommand
 from cloudmesh.shell.command import command
 
-from cloudmesh.sys.manage import Command, Git
+from cloudmesh.sys.manage import Command, Git, Version
 
 
 class SysCommand(PluginCommand):
+    """
+    The system command
+    """
+
+    # noinspection PyUnusedLocal
     @command
     def do_sys(self, args, arguments):
         """
@@ -16,19 +24,21 @@ class SysCommand(PluginCommand):
                 sys git commit MESSAGE
                 sys pypi upload
                 sys command generate NAME
+                sys version VERSION
 
           This command does some useful things.
 
           Arguments:
-              MESSAGE  the message to commit 
-              NAME     the command to generate
+              MESSAGE   the message to commit 
+              NAME      the command to generate
+              VERSION  the version number
 
           Options:
               -f      specify the file
 
           Description:      
               cms sys command generate my
-                This requires that you have checkecked out 
+                This requires that you have checked out 
                 
                 ./cloudmesh.common
                 ./cloudmesh.cmd5
@@ -71,3 +81,8 @@ class SysCommand(PluginCommand):
 
             name = arguments.NAME
             Command.generate(name)
+
+        elif arguments.version:
+
+            version = arguments.VERSION
+            Version.set(version)
