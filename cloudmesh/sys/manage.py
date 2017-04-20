@@ -57,6 +57,10 @@ class Git(object):
     Git management for the preparation to upload the code to pypi
     """
 
+    pypis   = ["cloudmesh.common", "cloudmesh.cmd5", "cloudmesh.rest", "cloudmesh.sys", "cloudmesh.evegenie"]
+    commits = pypis + ["cloudmesh.bar"]
+
+
     @classmethod
     def upload(cls):
         """
@@ -65,7 +69,7 @@ class Git(object):
         """
 
         banner("CREATE DIST")
-        for p in ["cloudmesh.common", "cloudmesh.cmd5", "cloudmesh.rest", "cloudmesh.sys"]:
+        for p in cls.pypis:
             os.system("cd {}; make dist".format(p))
 
         banner("UPLOAD TO PYPI")
@@ -81,7 +85,7 @@ class Git(object):
         """
 
         banner("COMMIT " + msg)
-        for p in ["cloudmesh.common", "cloudmesh.cmd5", "cloudmesh.rest", "cloudmesh.rest"]:
+        for p in cls.commits:
             banner("repo " + p)
             os.system('cd {}; git commit -a -m "{}"'.format(p, msg))
             os.system('cd {}; git push'.format(p))
@@ -99,6 +103,6 @@ class Version(object):
         :param version: the version as text string
         :return: 
         """
-        for repo in ["cloudmesh.common", "cloudmesh.cmd5", "cloudmesh.rest", "cloudmesh.sys"]:
+        for repo in Git.commits:
             print(repo, "->", version)
             writefile(os.path.join(repo, "VERSION"), version)
