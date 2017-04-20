@@ -57,8 +57,8 @@ class Git(object):
     Git management for the preparation to upload the code to pypi
     """
 
-    pypis   = ["cloudmesh.common", "cloudmesh.cmd5", "cloudmesh.rest", "cloudmesh.sys", "cloudmesh.evegenie"]
-    commits = pypis + ["cloudmesh.bar"]
+    pypis   = ["cloudmesh.common", "cloudmesh.cmd5", "cloudmesh.sys", "cloudmesh.evegenie"]
+    commits = pypis + ["cloudmesh.bar", "cloudmesh.rest"]
 
 
     @classmethod
