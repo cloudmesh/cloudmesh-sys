@@ -57,16 +57,24 @@ class SysCommand(PluginCommand):
                 
                 cd cloudmesh.my; pip install .
                 
-            cms commit
-            cms upload
+            The commands 'version', 'commit' and 'upload'
+            are only to be used by Gregor.        
+    
+            cms version
+                The version command adds a new version to the 
+                VERSION file for cmd5, cmommon, and sys.
+                This helps to keep the versions aligned across 
+                these modules.
             
-                These commands are only to be used by Gregor
-                They upload the new versions to pypi
-                
-                The git command adds a new version and commits
+            cms commit
+                The commmit  command adds a new version and commits
+
+            cms upload
                 The upload command uploads the new version to pypi
+
+            
         """
-        print(arguments)
+        # print(arguments)
 
         if arguments.commit:
 

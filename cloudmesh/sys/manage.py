@@ -58,7 +58,7 @@ class Git(object):
     """
 
     pypis   = ["cloudmesh.common", "cloudmesh.cmd5", "cloudmesh.sys", "cloudmesh.evegenie"]
-    commits = pypis + ["cloudmesh.bar", "cloudmesh.rest"]
+    commits = pypis + ["cloudmesh.bar", "cloudmesh.rest", "cloudmesh.robot"]
 
 
     @classmethod
