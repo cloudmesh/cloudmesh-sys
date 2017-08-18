@@ -10,6 +10,7 @@ from pprint import pprint
 
 from cloudmesh.common.util import banner
 from cloudmesh.common.util import writefile
+from cloudmesh.common.console import Console
 
 
 class Command(object):
@@ -70,11 +71,19 @@ class Git(object):
 
         banner("CREATE DIST")
         for p in cls.pypis:
-            os.system("cd {}; make dist".format(p))
+            try:
+                os.system("cd {}; make dist".format(p))
+            except Exception as e:
+                Console.error("can not create dist" + p)
+                print (e)
 
         banner("UPLOAD TO PYPI")
         for p in ["cloudmesh.common", "cloudmesh.cmd5", "cloudmesh.sys"]:  # , "cloudmesh.rest"]:
-            os.system("cd {}; make upload".format(p))
+            try:
+                os.system("cd {}; make upload".format(p))
+            except Exception as e:
+                Console.error("can upload" + p)
+                print (e)
 
     @classmethod
     def commit(cls, msg):

@@ -27,12 +27,7 @@ def readfile(filename):
 
 # requiers = readfile ('requirements.txt')
 requiers = """
-psutil
-pygments
-tox
-detox
-coverage
-flake8
+cloudmesh.common
 """.split("\n")
 
 # dependency_links = ['http://github.com/nicolaiarocci/eve.git@develop']
