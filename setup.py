@@ -28,6 +28,8 @@ def readfile(filename):
 # requiers = readfile ('requirements.txt')
 requiers = """
 cloudmesh.common
+wheel
+twine
 """.split("\n")
 
 # dependency_links = ['http://github.com/nicolaiarocci/eve.git@develop']
