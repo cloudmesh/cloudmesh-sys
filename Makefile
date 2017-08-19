@@ -10,26 +10,10 @@ define banner
 	@echo "###################################"
 endef
 
-ifeq ($(UNAME),Darwin)
-define terminal
-	osascript -e 'tell application "Terminal" to do script "$(1)"'
-endef
-endif
-ifeq ($(UNAME),Linux)
-define terminal
-	echo "Linux not yet supported, fix me"
-endef
-endif
-ifeq ($(UNAME),Windows)
-define terminal
-	echo "Windows not yet supported, fix me"
-endef
-endif
-
 source:
-	cd ../common; python setup.py install
-	cd ../cmd5; python setup.py install
-	python setup.py install
+	cd ../cloudmesh.cmd5; make source
+	pip install -e .
+	cms help sys
 
 clean:
 	rm -rf *.zip
