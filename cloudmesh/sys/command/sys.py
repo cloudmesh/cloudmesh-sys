@@ -62,12 +62,12 @@ class SysCommand(PluginCommand):
     
             cms version
                 The version command adds a new version to the 
-                VERSION file for cmd5, cmommon, and sys.
+                VERSION file for cmd5, common, and sys.
                 This helps to keep the versions aligned across 
                 these modules.
             
             cms commit
-                The commmit  command adds a new version and commits
+                The commit  command adds a new version and commits
 
             cms upload
                 The upload command uploads the new version to pypi

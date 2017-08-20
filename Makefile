@@ -12,10 +12,13 @@ endef
 
 source:
 	cd ../cloudmesh.cmd5; make source
+	$(call banner, "Install cloudmesh.sys")
 	pip install -e .
+	$(call banner, "cms help sys")
 	cms help sys
 
 clean:
+	$(call banner, "CLEAN")
 	rm -rf *.zip
 	rm -rf *.egg-info
 	rm -rf *.eggs
@@ -32,9 +35,7 @@ clean:
 ######################################################################
 
 dist: clean
-	@echo "######################################"
-	@echo "# $(VERSION)"
-	@echo "######################################"
+	$(call banner, $VERSION)
 	python setup.py sdist
 	python setup.py bdist
 	python setup.py bdist_wheel
@@ -48,9 +49,7 @@ log:
 	git push
 
 register: dist
-	@echo "######################################"
-	@echo "# $(VERSION)"
-	@echo "######################################"
+	$(call banner, $VERSION)
 	twine register dist/cloudmesh.$(package)-$(VERSION)-py2.py3-none-any.whl
 	#twine register dist/cloudmesh.$(package)-$(VERSION).macosx-10.12-x86_64.tar.gz
 
@@ -58,6 +57,7 @@ upload: dist
 	twine upload dist/*
 
 tag:
+	$(call banner, "TAG")
 	touch README.rst
 	git tag $(VERSION)
 	git commit -a -m "$(VERSION)"

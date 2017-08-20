@@ -35,6 +35,7 @@ class Command(object):
         pprint(data)
 
         os.system("rm -rf  cloudmesh.gregor")
+        # noinspection PyUnusedLocal,PyBroadException
         try:
             os.system("git clone https://github.com/cloudmesh/cloudmesh.bar")
         except Exception as e:
@@ -58,9 +59,8 @@ class Git(object):
     Git management for the preparation to upload the code to pypi
     """
 
-    pypis   = ["cloudmesh.common", "cloudmesh.cmd5", "cloudmesh.sys", "cloudmesh.evegenie"]
+    pypis = ["cloudmesh.common", "cloudmesh.cmd5", "cloudmesh.sys", "cloudmesh.evegenie"]
     commits = pypis + ["cloudmesh.bar", "cloudmesh.rest", "cloudmesh.robot"]
-
 
     @classmethod
     def upload(cls):
@@ -75,7 +75,7 @@ class Git(object):
                 os.system("cd {}; make dist".format(p))
             except Exception as e:
                 Console.error("can not create dist" + p)
-                print (e)
+                print(e)
 
         banner("UPLOAD TO PYPI")
         for p in ["cloudmesh.common", "cloudmesh.cmd5", "cloudmesh.sys"]:  # , "cloudmesh.rest"]:
@@ -83,7 +83,7 @@ class Git(object):
                 os.system("cd {}; make upload".format(p))
             except Exception as e:
                 Console.error("can upload" + p)
-                print (e)
+                print(e)
 
     @classmethod
     def commit(cls, msg):
