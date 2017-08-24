@@ -13,6 +13,7 @@ endef
 source:
 	cd ../cloudmesh.cmd5; make source
 	$(call banner, "Install cloudmesh.sys")
+	python setup.py install
 	pip install -e .
 	$(call banner, "cms help sys")
 	cms help sys
