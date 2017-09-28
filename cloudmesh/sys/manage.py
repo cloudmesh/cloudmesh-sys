@@ -82,7 +82,7 @@ class Git(object):
                 print(e)
 
         banner("UPLOAD TO PYPI")
-        for p in ["cloudmesh.common", "cloudmesh.cmd5", "cloudmesh.sys"]:  # , "cloudmesh.rest"]:
+        for p in ["cloudmesh.common", "cloudmesh.cmd5", "cloudmesh.sys", "cloudmesh.comet"]:  # , "cloudmesh.rest"]:
             try:
                 os.system("cd {}; make upload".format(p))
             except Exception as e:
