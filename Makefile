@@ -13,8 +13,7 @@ endef
 source:
 	cd ../cloudmesh.cmd5; make source
 	$(call banner, "Install cloudmesh.sys")
-	python setup.py install
-	pip install -e .
+	pip install -e . -U
 	$(call banner, "cms help sys")
 	cms help sys
 
@@ -37,7 +36,7 @@ clean:
 
 dist: clean
 	$(call banner, $VERSION)
-	python setup.py sdist
+	python setup.py sdist --formats=gztar,zip
 	python setup.py bdist
 	python setup.py bdist_wheel
 
