@@ -34,14 +34,18 @@ clean:
 # PYPI
 ######################################################################
 
+
+twine:
+	pip install -U twine
+
 dist: clean
 	$(call banner, $VERSION)
 	python setup.py sdist --formats=gztar,zip
 	python setup.py bdist
 	python setup.py bdist_wheel
 
-upload_test:
-	python setup.py	 sdist bdist bdist_wheel upload -r https://testpypi.python.org/pypi
+upload_test: twine dist
+	python setup.py	 sdist bdist bdist_wheel upload -r pypitest
 
 log:
 	gitchangelog | fgrep -v ":dev:" | fgrep -v ":new:" > ChangeLog
