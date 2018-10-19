@@ -45,7 +45,8 @@ dist: clean
 	python setup.py bdist_wheel
 
 upload_test: twine dist
-	python setup.py	 sdist bdist bdist_wheel upload -r pypitest
+#	python setup.py	 sdist bdist bdist_wheel upload -r pypitest
+	twine upload --repository pypitest dist/cloudmesh.sys-*.whl	dist/cloudmesh.sys-*.tar.gz
 
 log:
 	gitchangelog | fgrep -v ":dev:" | fgrep -v ":new:" > ChangeLog
