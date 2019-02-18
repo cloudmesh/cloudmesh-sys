@@ -52,6 +52,7 @@ class Command(object):
         shutil.rmtree('{package}/cloudmesh/foo'.format(**data))
         os.system('sed -ie "s/bar/{command}/g" {package}/cloudmesh/{command}/command/{command}.py'.format(**data))
         os.system('sed -ie "s/Bar/{Command}/g" {package}/cloudmesh/{command}/command/{command}.py'.format(**data))
+        os.system('sed -ie "s/bar/{command}/g" {package}/Makefile'.format(**data))        
 
 
 class Git(object):
