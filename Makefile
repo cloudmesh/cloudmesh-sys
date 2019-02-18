@@ -40,8 +40,8 @@ twine:
 
 dist: clean
 	$(call banner, $VERSION)
-	python setup.py sdist --formats=gztar,zip
-	python setup.py bdist
+	python setup.py sdist --formats=zip
+	# python setup.py bdist
 	python setup.py bdist_wheel
 
 upload_test: twine dist
