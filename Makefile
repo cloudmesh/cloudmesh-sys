@@ -11,8 +11,8 @@ define banner
 endef
 
 source:
-	cd ../cloudmesh.cmd5; make source
-	$(call banner, "Install cloudmesh.sys")
+	cd ../cloudmesh-cmd5; make source
+	$(call banner, "Install cloudmesh-sys")
 	pip install -e . -U
 	$(call banner, "cms help sys")
 	cms help sys
@@ -46,7 +46,7 @@ dist: clean
 
 upload_test: twine dist
 #	python setup.py	 sdist bdist bdist_wheel upload -r pypitest
-	twine upload --repository pypitest dist/cloudmesh.sys-*.whl	dist/cloudmesh.sys-*.tar.gz
+	twine upload --repository pypitest dist/cloudmesh-sys-*.whl	dist/cloudmesh-sys-*.tar.gz
 
 log:
 	gitchangelog | fgrep -v ":dev:" | fgrep -v ":new:" > ChangeLog
@@ -55,8 +55,8 @@ log:
 
 register: dist
 	$(call banner, $VERSION)
-	twine register dist/cloudmesh.$(package)-$(VERSION)-py2.py3-none-any.whl
-	#twine register dist/cloudmesh.$(package)-$(VERSION).macosx-10.12-x86_64.tar.gz
+	twine register dist/cloudmesh-$(package)-$(VERSION)-py2.py3-none-any.whl
+	#twine register dist/cloudmesh-$(package)-$(VERSION).macosx-10.12-x86_64.tar.gz
 
 upload: dist
 	twine upload dist/*
