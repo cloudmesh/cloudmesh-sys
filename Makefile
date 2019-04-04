@@ -38,32 +38,32 @@ clean:
 twine:
 	pip install -U twine
 
-dist: clean
-	$(call banner, $VERSION)
-	python setup.py sdist --formats=zip
-	# python setup.py bdist
-	python setup.py bdist_wheel
+dist:
+	python setup.py sdist bdist_wheel
+	twine check dist/*
 
-upload_test: twine dist
-#	python setup.py	 sdist bdist bdist_wheel upload -r pypitest
-	twine upload --repository pypitest dist/cloudmesh-sys-*.whl	dist/cloudmesh-sys-*.tar.gz
+patch: clean
+	$(call banner, patch to testpypi)
+	bumpversion --allow-dirty patch
+	python setup.py sdist bdist_wheel
+	git push origin master --tags
+	twine check dist/*
+	twine upload --repository testpypi https://test.pypi.org/legacy/ dist/*
 
-log:
-	gitchangelog | fgrep -v ":dev:" | fgrep -v ":new:" > ChangeLog
-	git commit -m "chg: dev: Update ChangeLog" ChangeLog
-	git push
-
-register: dist
-	$(call banner, $VERSION)
-	twine register dist/cloudmesh-$(package)-$(VERSION)-py2.py3-none-any.whl
-	#twine register dist/cloudmesh-$(package)-$(VERSION).macosx-10.12-x86_64.tar.gz
-
-upload: dist
+release: clean dist
+	$(call banner, release to pypi)
+	bumpversion release
+	python setup.py sdist bdist_wheel
+	git push origin master --tags
+	twine check dist/*
 	twine upload dist/*
 
-tag:
-	$(call banner, "TAG")
-	touch README.rst
-	git tag $(VERSION)
-	git commit -a -m "$(VERSION)"
+pip: patch
+	pip install --index-url https://test.pypi.org/simple/ \
+	    --extra-index-url https://pypi.org/simple cloudmesh-$(package)
+
+log:
+	$(call banner, log)
+	gitchangelog | fgrep -v ":dev:" | fgrep -v ":new:" > ChangeLog
+	git commit -m "chg: dev: Update ChangeLog" ChangeLog
 	git push
