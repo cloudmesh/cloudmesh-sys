@@ -1,8 +1,6 @@
 """
 Managing the cmd5 system installation and package distribution
 """
-from __future__ import print_function
-
 import os
 import shutil
 from distutils.dir_util import copy_tree
