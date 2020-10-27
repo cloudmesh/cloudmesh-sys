@@ -19,7 +19,7 @@ install:
   - pwd
   - pip install -r requirements.txt
   - pip install -r requirements-dev.txt
-  - pip install -r cloudmesh-cmd5
+  - pip install cloudmesh-cmd5
   - pip install .
   # - mkdir ~/.cloudmesh
   # - wget -P ~/.cloudmesh https://raw.githubusercontent.com/cloudmesh/cloudmesh-common/master/cloudmesh/etc/cloudmesh.yaml
