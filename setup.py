@@ -49,18 +49,17 @@ AUTHOR = "Gregor von Laszewski"
 AUTHOR_EMAIL = "laszewski@gmail.com"
 URL = "https://github.com/cloudmesh/cloudmesh-sys"
 
-
 setup(
-        name=NAME,
-        author=AUTHOR,
-        author_email=AUTHOR_EMAIL,
-        description=DESCRIPTION,
-        long_description=long_description,
-        long_description_content_type="text/markdown",
-        version=version,
-        license="Apache 2.0",
-        url=URL,
-        packages=find_packages(),
+    name=NAME,
+    author=AUTHOR,
+    author_email=AUTHOR_EMAIL,
+    description=DESCRIPTION,
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    version=version,
+    license="Apache 2.0",
+    url=URL,
+    packages=find_packages(),
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
@@ -91,11 +90,11 @@ setup(
         "Topic :: System :: Shells",
         "Topic :: Utilities",
     ],
-        install_requires=requiers,
-        tests_require=[
-            "flake8",
-            "coverage",
-        ],
-        zip_safe=False,
-        namespace_packages=['cloudmesh'],
-    )
+    install_requires=requiers,
+    tests_require=[
+        "flake8",
+        "coverage",
+    ],
+    zip_safe=False,
+    namespace_packages=['cloudmesh'],
+)
