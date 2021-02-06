@@ -31,17 +31,16 @@ class SysCommand(PluginCommand):
           This command does some useful things.
 
           Arguments:
-            MESSAGE   the message to commit 
+            MESSAGE   the message to commit
             NAME      the command to generate
             VERSION   the version number
 
           Options:
             -f      specify the file
 
-          Description:      
+          Description:
             cms sys command generate NAME
 
-                
                 When you execute this command it
                 will generate a  directory tree for a command
                 with the name
@@ -65,21 +64,20 @@ class SysCommand(PluginCommand):
                 like to add a command in that github directory.
 
             The commands 'version', 'commit' and 'upload'
-            are only to be used by Gregor.        
-    
+            are only to be used by Gregor.
+
             cms version
-                The version command adds a new version to the 
+                The version command adds a new version to the
                 VERSION file for cmd5, common, and sys.
-                This helps to keep the versions aligned across 
+                This helps to keep the versions aligned across
                 these modules.
-            
+
             cms commit
                 The commit  command adds a new version and commits
 
             cms upload
                 The upload command uploads the new version to pypi
 
-            
         """
         print(arguments)
 

@@ -24,7 +24,7 @@ class Command(object):
         """
         Generate a command template with the given name
         :param name: the name of the command
-        :return: 
+        :return:
         """
 
         data = {
@@ -43,7 +43,7 @@ class Command(object):
             pass
         try:
             os.system("git clone https://github.com/cloudmesh/cloudmesh-bar")
-        except Exception as e:
+        except Exception as e:  # noqa: F841
             pass
 
         if os.path.isdir("{package}/cloudmesh/{command}".format(**data)):
@@ -157,7 +157,7 @@ class Git(object):
     def upload(cls):
         """
         upload the code to pypi
-        :return: 
+        :return:
         """
 
         banner("CREATE DIST")
@@ -180,8 +180,8 @@ class Git(object):
     def commit(cls, msg):
         """
         commit the current code to git
-        :param msg: 
-        :return: 
+        :param msg:
+        :return:
         """
 
         banner("COMMIT " + msg)
@@ -201,7 +201,7 @@ class Version(object):
         """
         set the version number
         :param version: the version as text string
-        :return: 
+        :return:
         """
         for repo in Git.commits:
             print(repo, "->", version)

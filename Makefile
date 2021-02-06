@@ -17,6 +17,10 @@ source:
 	$(call banner, "cms help sys")
 	cms help sys
 
+flake8:
+	flake8 --max-line-length 124 --ignore=E722 cloudmesh
+	flake8 --max-line-length 124 --ignore=E722 tests
+
 requirements:
 	echo "cloudmesh-common" > tmp.txt
 	echo "cloudmesh-cmd5" >> tmp.txt
