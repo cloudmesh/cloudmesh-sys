@@ -26,6 +26,7 @@ class SysCommand(PluginCommand):
             sys upload
             sys commit MESSAGE
             sys command generate NAME [.]
+            sys generate command NAME [.]
             sys version VERSION
 
           This command does some useful things.
@@ -56,6 +57,7 @@ class SysCommand(PluginCommand):
 
                 pip install .
 
+            cms sys generate command NAME .
             cms sys command generate NAME .
 
                 the code will be installed in the current directory. This is

@@ -12,7 +12,10 @@ from cloudmesh.common.console import Console
 from cloudmesh.common.util import banner
 from cloudmesh.common.util import readfile
 from cloudmesh.common.util import writefile
+import textwrap
+# from cloudmesh.sys.__version__ import version
 
+version = "4.3.1"
 
 class Command(object):
     """
@@ -27,13 +30,13 @@ class Command(object):
         :return:
         """
 
-        data = {
-            "command": name,
-            "package": "cloudmesh-{}".format(name),
-            "Command": name.capitalize()
-        }
+        command = name
+        package = "cloudmesh-{}".format(name)
+        Command = name.capitalize()
 
-        pprint(data)
+        print(command)
+        print(package)
+        print(command)
 
         # os.system("rm -rf  cloudmesh-gregor")
         # noinspection PyUnusedLocal,PyBroadException
@@ -46,12 +49,26 @@ class Command(object):
         except Exception as e:  # noqa: F841
             pass
 
-        if os.path.isdir("{package}/cloudmesh/{command}".format(**data)):
+        if os.path.isdir(f"{package}/cloudmesh/{command}"):
             # noinspection PyPep8
             Console.error(
-                'The command directory "{package}/cloudmesh/{command}" already exists'.format(
-                    **data))
+                f'The command directory "{package}/cloudmesh/{command}" already exists')
             return ""
+
+        def generate_bumpversion(version="4.3.1", command="bar"):
+            script = textwrap.dedent(f"""
+            [bumpversion]
+            current_version = {version}
+            commit = True
+            tag = False
+            [bumpversion:file:VERSION]
+            [bumpversion:file:./cloudmesh/{command}/__version__.py]
+            [bumpversion:file:./cloudmesh/{command}/__init__.py]
+            """) + \
+            textwrap.dedent("""
+            search = version: {current_version}
+            replace = {new_version}""")
+            return script
 
         def replace_in_file(filename, old_text, new_text):
             content = readfile(filename)
@@ -98,42 +115,45 @@ class Command(object):
         #         pass
         #     print (line.strip())
 
-        path = Path("cloudmesh-bar/.git".format(**data)).resolve()
+        path = Path("cloudmesh-bar/.git").resolve()
         Shell.rmdir(path)
 
-        copy_tree("cloudmesh-bar", "{package}".format(**data))
+        copy_tree("cloudmesh-bar", f"{package}")
 
-        path = Path("{package}/.git".format(**data)).resolve()
+        path = Path(f"{package}/.git").resolve()
         Shell.rmdir(path)
 
-        replace_in_file("{package}/setup.py".format(**data),
+        replace_in_file(f"{package}/setup.py",
                         "bar",
-                        "{command}".format(**data))
+                        f"{command}")
 
-        os.rename("{package}/cloudmesh/bar/command/bar.py".format(**data),
-                  "{package}/cloudmesh/bar/command/{command}.py".format(**data))
-        os.rename("{package}/cloudmesh/bar".format(**data),
-                  "{package}/cloudmesh/{command}".format(**data))
+        os.rename(f"{package}/cloudmesh/bar/command/bar.py",
+                  f"{package}/cloudmesh/bar/command/{command}.py")
+        os.rename(f"{package}/cloudmesh/bar",
+                  f"{package}/cloudmesh/{command}")
 
-        shutil.rmtree('{package}/cloudmesh/foo'.format(**data))
-        shutil.rmtree('{package}/cloudmesh/plugin'.format(**data))
+        shutil.rmtree(f'{package}/cloudmesh/foo')
+        shutil.rmtree(f'{package}/cloudmesh/plugin')
 
         replace_in_file(
-            "{package}/cloudmesh/{command}/command/{command}.py".format(**data),
+            f"{package}/cloudmesh/{command}/command/{command}.py",
             "Bar",
-            "{Command}".format(**data))
+            f"{Command}")
 
         replace_in_file(
-            "{package}/cloudmesh/{command}/command/{command}.py".format(**data),
+            f"{package}/cloudmesh/{command}/command/{command}.py",
             "bar",
-            "{command}".format(**data))
+            f"{command}")
 
-        replace_in_file("{package}/Makefile".format(**data),
-                        "bar",
-                        "{command}".format(**data))
+        replace_in_file(f"{package}/Makefile", "bar", f"{command}")
+        replace_in_file(f"{package}/README.md", "bar", f"{command}")
 
-        delete("{package}".format(**data), "Makefilee")
-        delete("{package}".format(**data), "setup.pye")
+        writefile(f"{package}/.bumpversion.cfg",
+                  generate_bumpversion(version=version, command=command))
+
+
+        delete(f"{package}", "Makefilee")
+        delete(f"{package}", "setup.pye")
 
         shutil.rmtree("cloudmesh-bar")
 
@@ -163,17 +183,17 @@ class Git(object):
         banner("CREATE DIST")
         for p in cls.pypis:
             try:
-                os.system("cd {}; make dist".format(p))
+                os.system(f"cd {p}; make dist")
             except Exception as e:
-                Console.error("can not create dist" + p)
+                Console.error("can not create dist " + p)
                 print(e)
 
         banner("UPLOAD TO PYPI")
         for p in cls.pypis:
             try:
-                os.system("cd {}; make upload".format(p))
+                os.system(f"cd {p}; make upload")
             except Exception as e:
-                Console.error("can upload" + p)
+                Console.error("can upload " + p)
                 print(e)
 
     @classmethod
@@ -187,8 +207,8 @@ class Git(object):
         banner("COMMIT " + msg)
         for p in cls.commits:
             banner("repo " + p)
-            os.system('cd {}; git commit -a -m "{}"'.format(p, msg))
-            os.system('cd {}; git push'.format(p))
+            os.system(f'cd {p}; git commit -a -m "{msg}"')
+            os.system(f'cd {p}; git push')
 
 
 class Version(object):
