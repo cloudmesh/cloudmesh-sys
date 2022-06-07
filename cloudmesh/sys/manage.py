@@ -3,19 +3,19 @@ Managing the cmd5 system installation and package distribution
 """
 import os
 import shutil
-from distutils.dir_util import copy_tree
+import textwrap
 from pathlib import Path
-from pprint import pprint
 
 from cloudmesh.common.Shell import Shell
 from cloudmesh.common.console import Console
 from cloudmesh.common.util import banner
 from cloudmesh.common.util import readfile
 from cloudmesh.common.util import writefile
-import textwrap
+
 # from cloudmesh.sys.__version__ import version
 
 version = "4.3.1"
+
 
 class Command(object):
     """
@@ -65,7 +65,7 @@ class Command(object):
             [bumpversion:file:./cloudmesh/{command}/__version__.py]
             [bumpversion:file:./cloudmesh/{command}/__init__.py]
             """) + \
-            textwrap.dedent("""
+                     textwrap.dedent("""
             search = version: {current_version}
             replace = {new_version}""")
             return script
@@ -118,7 +118,7 @@ class Command(object):
         path = Path("cloudmesh-bar/.git").resolve()
         Shell.rmdir(path)
 
-        copy_tree("cloudmesh-bar", f"{package}")
+        shutil.copytree("cloudmesh-bar", f"{package}", dirs_exist_ok=False)
 
         path = Path(f"{package}/.git").resolve()
         Shell.rmdir(path)
@@ -150,7 +150,6 @@ class Command(object):
 
         writefile(f"{package}/.bumpversion.cfg",
                   generate_bumpversion(version=version, command=command))
-
 
         delete(f"{package}", "Makefilee")
         delete(f"{package}", "setup.pye")

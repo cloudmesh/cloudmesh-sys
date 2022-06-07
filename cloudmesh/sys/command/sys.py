@@ -1,14 +1,14 @@
 """
 The sys command to manage the cmd5 distribution
 """
+import glob
+import os
+import shutil
+
+from cloudmesh.common.util import path_expand
 from cloudmesh.shell.command import PluginCommand
 from cloudmesh.shell.command import command
-
 from cloudmesh.sys.manage import Command, Git, Version
-import shutil
-import glob
-from cloudmesh.common.util import path_expand
-import os
 
 
 class SysCommand(PluginCommand):
