@@ -8,4 +8,8 @@ commands to cmd5. For more details we like you to look at the
 * <https://github.com/cloudmesh/cloudmesh.cmd5>
 * <https://cloudmesh.github.io/cloudmesh-manual>
 
+## Acknowledgements
 
+Continued work was in part funded by the NSF
+CyberTraining: CIC: CyberTraining for Students and Technologies
+from Generation Z with the awadrd numbers 1829704 and 2200409.
