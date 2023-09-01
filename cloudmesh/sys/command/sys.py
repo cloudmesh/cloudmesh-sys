@@ -10,6 +10,7 @@ from cloudmesh.shell.command import PluginCommand
 from cloudmesh.shell.command import command
 from cloudmesh.sys.manage import Command, Git, Version
 
+from cloudmesh.common.Shell import Shell
 
 class SysCommand(PluginCommand):
     """
@@ -28,6 +29,7 @@ class SysCommand(PluginCommand):
             sys command generate NAME [.]
             sys generate command NAME [.]
             sys version VERSION
+            sys install choco
 
           This command does some useful things.
 
@@ -85,7 +87,11 @@ class SysCommand(PluginCommand):
 
         dot = arguments["."]
 
-        if arguments.commit:
+        if arguments.install and arguments.choco:
+
+            Shell.install_chocolatey()
+
+        elif arguments.commit:
 
             msg = arguments.MESSAGE
             Git.commit(msg)
