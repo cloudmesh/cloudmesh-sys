@@ -21,11 +21,13 @@ flake8:
 	cd ..; flake8 --max-line-length 124 --ignore=E722 cloudmesh-$(package)/cloudmesh
 	cd ..; flake8 --max-line-length 124 --ignore=E722 cloudmesh-$(package)/tests
 
+
 requirements:
-	echo "cloudmesh-common" > tmp.txt
-	echo "cloudmesh-cmd5" >> tmp.txt
-	pip-compile setup.py
-	fgrep -v "# via" requirements.txt | fgrep -v "cloudmesh" >> tmp.txt
+	echo "# cloudmesh-common requirements"> tmp.txt
+	#echo "cloudmesh-common" > tmp.txt
+	#echo "cloudmesh-cmd5" >> tmp.txt
+	# pip-compile setup.py
+	cat requirements.txt >> tmp.txt
 	mv tmp.txt requirements.txt
 	-git commit -m "update requirements" requirements.txt
 	-git push
