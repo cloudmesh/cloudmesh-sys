@@ -85,9 +85,7 @@ setup(
         "Operating System :: Microsoft :: Windows :: Windows 10",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.12",
         "Topic :: Internet",
         "Topic :: Scientific/Engineering",
         "Topic :: Software Development :: Libraries",
@@ -103,5 +101,4 @@ setup(
         "coverage",
     ],
     zip_safe=False,
-    namespace_packages=['cloudmesh'],
 )
