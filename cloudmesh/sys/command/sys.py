@@ -6,10 +6,13 @@ import os
 import shutil
 
 from cloudmesh.common.util import path_expand
+from cloudmesh.common.systeminfo import os_is_windows
 from cloudmesh.shell.command import PluginCommand
 from cloudmesh.shell.command import command
-from cloudmesh.sys.manage import Command, Git, Version
+from cloudmesh.sys.sys import Command, Git, Version
 
+from cloudmesh.common.Shell import Shell
+from cloudmesh.common.Shell import Console
 
 class SysCommand(PluginCommand):
     """
@@ -28,6 +31,7 @@ class SysCommand(PluginCommand):
             sys command generate NAME [.]
             sys generate command NAME [.]
             sys version VERSION
+            sys install choco
 
           This command does some useful things.
 
@@ -85,7 +89,17 @@ class SysCommand(PluginCommand):
 
         dot = arguments["."]
 
-        if arguments.commit:
+        if arguments.install and arguments.choco:
+            if not os_is_windows():
+                Console.error("Windows only")
+                return
+            import pyuac
+            if not pyuac.isUserAdmin():
+                Console.error("Please run the terminal as administrator")
+                return
+            Shell.install_chocolatey()
+
+        elif arguments.commit:
 
             msg = arguments.MESSAGE
             Git.commit(msg)

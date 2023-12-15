@@ -21,11 +21,13 @@ flake8:
 	cd ..; flake8 --max-line-length 124 --ignore=E722 cloudmesh-$(package)/cloudmesh
 	cd ..; flake8 --max-line-length 124 --ignore=E722 cloudmesh-$(package)/tests
 
+
 requirements:
-	echo "cloudmesh-common" > tmp.txt
-	echo "cloudmesh-cmd5" >> tmp.txt
-	pip-compile setup.py
-	fgrep -v "# via" requirements.txt | fgrep -v "cloudmesh" >> tmp.txt
+	echo "# cloudmesh-common requirements"> tmp.txt
+	#echo "cloudmesh-common" > tmp.txt
+	#echo "cloudmesh-cmd5" >> tmp.txt
+	# pip-compile setup.py
+	cat requirements.txt >> tmp.txt
 	mv tmp.txt requirements.txt
 	-git commit -m "update requirements" requirements.txt
 	-git push
@@ -49,7 +51,6 @@ clean:
 # PYPI
 ######################################################################
 
-
 twine:
 	pip install -U twine
 
@@ -57,21 +58,23 @@ dist:
 	python setup.py sdist bdist_wheel
 	twine check dist/*
 
-patch: clean requirements
-	$(call banner, "bbuild")
-	bump2version --no-tag --allow-dirty patch
+patch: clean twine
+	$(call banner, "patch")
+	cms bumpversion patch
 	python setup.py sdist bdist_wheel
-	git push
-	# git push origin main --tags
+	git push origin main --tags
 	twine check dist/*
 	twine upload --repository testpypi  dist/*
-	# $(call banner, "install")
-	# sleep 10
-	# pip install --index-url https://test.pypi.org/simple/ cloudmesh-$(package) -U
 
 minor: clean
 	$(call banner, "minor")
-	bump2version minor --allow-dirty
+	cms bumpversion minor
+	@cat VERSION
+	@echo
+
+major: clean
+	$(call banner, "major")
+	cms bumpversion major
 	@cat VERSION
 	@echo
 
@@ -85,18 +88,6 @@ release: clean
 	$(call banner, "install")
 	@cat VERSION
 	@echo
-	# sleep 10
-	# pip install -U cloudmesh-common
-
-
-dev:
-	bump2version --new-version "$(VERSION)-dev0" part --allow-dirty
-	bump2version patch --allow-dirty
-	@cat VERSION
-	@echo
-
-reset:
-	bump2version --new-version "4.0.0-dev0" part --allow-dirty
 
 upload:
 	twine check dist/*
@@ -105,10 +96,10 @@ upload:
 pip:
 	pip install --index-url https://test.pypi.org/simple/ cloudmesh-$(package) -U
 
-#	    --extra-index-url https://test.pypi.org/simple
-
 log:
 	$(call banner, log)
 	gitchangelog | fgrep -v ":dev:" | fgrep -v ":new:" > ChangeLog
 	git commit -m "chg: dev: Update ChangeLog" ChangeLog
 	git push
+
+
