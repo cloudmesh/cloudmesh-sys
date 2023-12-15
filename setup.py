@@ -18,7 +18,7 @@
 import io
 import os
 
-from setuptools import find_packages, setup
+from setuptools import find_packages, find_namespace_packages, setup
 
 
 def readfile(filename):
@@ -59,7 +59,14 @@ setup(
     version=version,
     license="Apache 2.0",
     url=URL,
-    packages=find_packages(),
+    packages=find_namespace_packages(
+        exclude=("tests",
+                 "deprecated",
+                 "propose",
+                 "examples",
+                 "conda"),
+        include=['cloudmesh']),
+    package_dir={"cloudmesh": "cloudmesh"},
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",

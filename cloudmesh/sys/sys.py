@@ -57,17 +57,11 @@ class Command(object):
 
         def generate_bumpversion(version="4.3.1", command="bar"):
             script = textwrap.dedent(f"""
-            [bumpversion]
-            current_version = {version}
-            commit = True
-            tag = False
-            [bumpversion:file:VERSION]
-            [bumpversion:file:./cloudmesh/{command}/__version__.py]
-            [bumpversion:file:./cloudmesh/{command}/__init__.py]
-            """) + \
-                     textwrap.dedent("""
-            search = version: {current_version}
-            replace = {new_version}""")
+            bumpversion:
+            - VERSION]
+            - cloudmesh/{command}/__version__.py
+            - cloudmesh/{command}/__init__.py
+            """)
             return script
 
         def replace_in_file(filename, old_text, new_text):
@@ -148,7 +142,7 @@ class Command(object):
         replace_in_file(f"{package}/Makefile", "bar", f"{command}")
         replace_in_file(f"{package}/README.md", "bar", f"{command}")
 
-        writefile(f"{package}/.bumpversion.cfg",
+        writefile(f"{package}/bumpversion.yaml",
                   generate_bumpversion(version=version, command=command))
 
         delete(f"{package}", "Makefilee")

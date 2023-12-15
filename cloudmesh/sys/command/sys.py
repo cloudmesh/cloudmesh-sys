@@ -9,7 +9,7 @@ from cloudmesh.common.util import path_expand
 from cloudmesh.common.systeminfo import os_is_windows
 from cloudmesh.shell.command import PluginCommand
 from cloudmesh.shell.command import command
-from cloudmesh.sys.manage import Command, Git, Version
+from cloudmesh.sys.sys import Command, Git, Version
 
 from cloudmesh.common.Shell import Shell
 from cloudmesh.common.Shell import Console
