@@ -14,7 +14,7 @@ from cloudmesh.common.util import writefile
 
 # from cloudmesh.sys.__version__ import version
 
-version = "4.3.1"
+version = "5.0.0"
 
 
 class Command(object):
@@ -55,7 +55,7 @@ class Command(object):
                 f'The command directory "{package}/cloudmesh/{command}" already exists')
             return ""
 
-        def generate_bumpversion(version="4.3.1", command="bar"):
+        def generate_bumpversion(version="5.0.0", command="bar"):
             script = textwrap.dedent(f"""
             bumpversion:
             - VERSION]
@@ -117,7 +117,7 @@ class Command(object):
         path = Path(f"{package}/.git").resolve()
         Shell.rmdir(path)
 
-        replace_in_file(f"{package}/setup.py",
+        replace_in_file(f"{package}/pyproject.toml",
                         "bar",
                         f"{command}")
 
@@ -125,9 +125,6 @@ class Command(object):
                   f"{package}/cloudmesh/bar/command/{command}.py")
         os.rename(f"{package}/cloudmesh/bar",
                   f"{package}/cloudmesh/{command}")
-
-        shutil.rmtree(f'{package}/cloudmesh/foo')
-        shutil.rmtree(f'{package}/cloudmesh/plugin')
 
         replace_in_file(
             f"{package}/cloudmesh/{command}/command/{command}.py",
@@ -146,7 +143,7 @@ class Command(object):
                   generate_bumpversion(version=version, command=command))
 
         delete(f"{package}", "Makefilee")
-        delete(f"{package}", "setup.pye")
+        # delete(f"{package}", "setup.pye")
 
         shutil.rmtree("cloudmesh-bar")
 
@@ -158,9 +155,7 @@ class Git(object):
 
     pypis = ["cloudmesh-common",
              "cloudmesh-cmd5",
-             "cloudmesh-sys",
-             "cloudmesh-comet",
-             "cloudmesh-openapi"]
+             "cloudmesh-sys"]
     commits = pypis + ["cloudmesh-bar"]
 
     # , "cloudmesh-rest"]
