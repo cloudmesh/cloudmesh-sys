@@ -11,7 +11,7 @@ from cloudmesh.common.systeminfo import os_is_windows
 from cloudmesh.common.util import path_expand
 from cloudmesh.shell.command import PluginCommand
 from cloudmesh.shell.command import command
-from cloudmesh.sys.sys import Command, Git, Version
+from cloudmesh.sys.sys import Sys, Git, Version
 
 
 class SysCommand(PluginCommand):
@@ -111,12 +111,11 @@ class SysCommand(PluginCommand):
 
         elif arguments.generate:
             name = arguments.NAME
-            Command.generate(name)
+            Sys.generate(name)
 
             if dot:
                 for file in [
                     "LICENSE",
-                    ".bumpversion.cfg",
                     ".gitignore",
                     "requirements.txt",
                     "Makefile",

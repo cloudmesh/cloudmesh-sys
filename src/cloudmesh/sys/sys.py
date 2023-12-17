@@ -11,10 +11,7 @@ from cloudmesh.common.util import banner
 from cloudmesh.common.util import readfile
 from cloudmesh.common.util import writefile
 
-# from cloudmesh.sys.__version__ import version
-
-version = "5.0.0"
-
+from cloudmesh.sys.__version__ import version
 
 class Sys:
     """
@@ -57,7 +54,7 @@ class Sys:
             Console.error(str(e))
             return ""
 
-        def generate_bumpversion(version="5.0.0"):
+        def generate_bumpversion():
             script = textwrap.dedent(
                 f"""
             bumpversion:
@@ -135,10 +132,10 @@ class Sys:
         replace_in_file(f"{package}/Makefile", "bar", f"{command}")
         replace_in_file(f"{package}/README.md", "bar", f"{command}")
 
-        writefile(f"{package}/bumpversion.yaml", generate_bumpversion(version=version))
+        writefile(f"{package}/bumpversion.yaml", generate_bumpversion())
 
 
-class Git(object):
+class Git:
     """
     Git management for the preparation to upload the code to pypi
     """
@@ -187,7 +184,7 @@ class Git(object):
             os.system(f"cd {p}; git push")
 
 
-class Version(object):
+class Version:
     """
     set the version number of all base packages
     """
