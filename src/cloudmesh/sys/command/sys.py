@@ -5,14 +5,14 @@ import glob
 import os
 import shutil
 
-from cloudmesh.common.util import path_expand
+from cloudmesh.common.Shell import Console
+from cloudmesh.common.Shell import Shell
 from cloudmesh.common.systeminfo import os_is_windows
+from cloudmesh.common.util import path_expand
 from cloudmesh.shell.command import PluginCommand
 from cloudmesh.shell.command import command
 from cloudmesh.sys.sys import Command, Git, Version
 
-from cloudmesh.common.Shell import Shell
-from cloudmesh.common.Shell import Console
 
 class SysCommand(PluginCommand):
     """
@@ -28,8 +28,7 @@ class SysCommand(PluginCommand):
           Usage:
             sys upload
             sys commit MESSAGE
-            sys command generate NAME [.]
-            sys generate command NAME [.]
+            sys generate NAME [.]
             sys version VERSION
             sys install choco
 
@@ -44,7 +43,7 @@ class SysCommand(PluginCommand):
             -f      specify the file
 
           Description:
-            cms sys command generate NAME
+            cms sys generate NAME
 
                 When you execute this command it
                 will generate a  directory tree for a command
@@ -61,8 +60,7 @@ class SysCommand(PluginCommand):
 
                 pip install .
 
-            cms sys generate command NAME .
-            cms sys command generate NAME .
+            cms sys generate  NAME .
 
                 the code will be installed in the current directory. This is
                 helpful, if you already are in a directory fof the name
@@ -94,36 +92,35 @@ class SysCommand(PluginCommand):
                 Console.error("Windows only")
                 return
             import pyuac
+
             if not pyuac.isUserAdmin():
                 Console.error("Please run the terminal as administrator")
                 return
             Shell.install_chocolatey()
 
         elif arguments.commit:
-
             msg = arguments.MESSAGE
             Git.commit(msg)
 
         elif arguments.upload:
-
             Git.upload()
 
-        elif arguments.readme and arguments.generate:
+        # elif arguments.readme and arguments.generate:
+        #     name = arguments.NAME
+        #     Command.generate(name)
 
-            name = arguments.NAME
-            Command.generate(name)
-
-        elif arguments.command and arguments.generate:
-
+        elif arguments.generate:
             name = arguments.NAME
             Command.generate(name)
 
             if dot:
-                for file in ["LICENSE",
-                             ".bumpversion.cfg",
-                             ".gitignore",
-                             "requirements.txt",
-                             "Makefile"]:
+                for file in [
+                    "LICENSE",
+                    ".bumpversion.cfg",
+                    ".gitignore",
+                    "requirements.txt",
+                    "Makefile",
+                ]:
                     try:
                         os.remove(file)
                     except:
@@ -136,6 +133,5 @@ class SysCommand(PluginCommand):
                 shutil.rmtree("cloudmesh-{name}".format(name=name))
 
         elif arguments.version:
-
             version = arguments.VERSION
             Version.set(version)
