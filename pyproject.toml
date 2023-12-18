@@ -9,7 +9,7 @@ requires = [
 [project]
 name = "cloudmesh-sys"
 version = "5.0.19"
-description = "A set of useful APIs for cloudmesh"
+description = "A cloudmesh command sys that can generate new cloudmesh commands and gets some info about cloudmesh deployments."
 readme = "README.md"
 requires-python = ">=3.8"
 license = {file = "LICENSE"}
