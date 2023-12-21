@@ -51,8 +51,13 @@ classifiers = [
 dependencies = [
     "cloudmesh-cmd5",
 ]
+
 [project.urls]
-"Documentation" = "https://github.com/cloudmesh/cloudmesh-common"
+Homepage = "https://github.com/cloudmesh/cloudmesh-sys"
+Documentation = "https://github.com/cloudmesh/cloudmesh-sys/blob/main/README.md"
+Repository = "https://github.com/cloudmesh/cloudmesh-sys.git"
+Issues = "https://github.com/cloudmesh/cloudmesh-sys/issues"
+Changelog = "https://github.com/cloudmesh/cloudmesh-sys/blob/main/CHANGELOG.md"
 
 [tool.setuptools.packages.find]
 where = ["src/"]
