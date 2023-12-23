@@ -1,5 +1,4 @@
 bumpversion:
 - src/cloudmesh/sys/__init__.py
-- src/cloudmesh/sys/__version__.py
 - pyproject.toml
 - VERSION
