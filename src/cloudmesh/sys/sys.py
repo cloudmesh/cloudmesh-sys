@@ -62,17 +62,16 @@ class Sys:
         except Exception as e:  # noqa: F841
             Console.error(str(e))
             return ""
-
-        def generate_bumpversion():
-            script = textwrap.dedent(
-                f"""
-            bumpversion:
-            - VERSION
-            - src/cloudmesh/{command}/__version__.py
-            - src/cloudmesh/{command}/__init__.py
-            """
-            )
-            return script
+        #
+        # def generate_bumpversion():
+        #     script = textwrap.dedent(
+        #         f"""
+        #     bumpversion:
+        #     - VERSION
+        #     - src/cloudmesh/{command}/__init__.py
+        #     """
+        #     )
+        #     return script
 
         def replace_in_file(filename, old_text, new_text):
             content = readfile(filename)
@@ -141,7 +140,7 @@ class Sys:
         replace_in_file(f"{package}/Makefile", "bar", f"{command}")
         replace_in_file(f"{package}/README.md", "bar", f"{command}")
 
-        writefile(f"{package}/bumpversion.yaml", generate_bumpversion())
+        # writefile(f"{package}/bumpversion.yaml", generate_bumpversion())
 
 
 class Git:
